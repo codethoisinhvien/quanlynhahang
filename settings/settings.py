@@ -101,8 +101,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
+CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = ['quanlynhahanguet.herokuapp.com', "localhost"]
 
-LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
