@@ -17,5 +17,6 @@ Including another URLconf
 from django.urls import path
 from src.apis import FoodGroupApi
 urlpatterns = [
-  path(r'food-group',FoodGroupApi.as_view(),name='food-group')
+  path(r'food-group',FoodGroupApi.as_view(),name='food-group'),
+  path(r'food-group/<int:id>', FoodGroupApi.as_view(), name='food-group')
 ]

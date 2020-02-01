@@ -4,3 +4,6 @@ django-cors-headers
 mysqlclient
 gunicorn
 httplib2
+daphne
+drf-yasg
+

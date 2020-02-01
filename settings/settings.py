@@ -37,9 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'drf_yasg',
     'src'
 ]
-
+# REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'}
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -77,9 +78,24 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+        'ENGINE': 'django.db.backends.mysql',
+        # MySQL database host ip.
+        # MySQL database host ip.
+        'HOST': 'eu-cdbr-west-02.cleardb.net',
+        # port number.
+        'PORT': '3306',
+        # database name.
+        'NAME': 'heroku_054d3526d2b6b7b',
+        # user name.
+        'USER': 'bc981f7580442e',
+        # password
+        'PASSWORD': 'dc386137',
+        # connect options
+        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", 'charset': 'utf8mb4'},
+
     }
+
 }
 
 # Password validation

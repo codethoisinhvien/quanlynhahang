@@ -1,2 +1,2 @@
-web: gunicorn config.asgi
+web: daphne config.asgi
 
