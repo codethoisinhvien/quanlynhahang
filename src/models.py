@@ -9,6 +9,6 @@ class FoodGroup(models.Model):
 class Food(models.Model):
     name = models.CharField(max_length=50)
     price = models.IntegerField()
-    status = models.BooleanField()
+    status = models.BooleanField(default=True)
     food_group = models.ForeignKey(FoodGroup,models.CASCADE)
 

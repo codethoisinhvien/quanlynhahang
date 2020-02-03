@@ -15,8 +15,11 @@ Including another URLconf
 """
 
 from django.urls import path
-from src.apis import FoodGroupApi
+from src.apis import FoodGroupApi,FoodApi
 urlpatterns = [
   path(r'food-group',FoodGroupApi.as_view(),name='food-group'),
-  path(r'food-group/<int:id>', FoodGroupApi.as_view(), name='food-group')
+  path(r'food-group/<int:id>', FoodGroupApi.as_view(), name='food-group'),
+  path(r'foods', FoodApi.as_view(), name='foods'),
+  path(r'foods/<int:id>', FoodApi.as_view(), name='foods'),
+
 ]
