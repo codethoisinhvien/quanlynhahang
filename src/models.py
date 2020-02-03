@@ -16,6 +16,9 @@ class TableGroup(models.Model):
     price = models.IntegerField(default=0)
 
 
-# class Table(models.Model):
-#     name = models.CharField(max_length=50),
-
+class Table(models.Model):
+    name = models.CharField(max_length=50,unique=True),
+    price = models.IntegerField(default=0),
+    table_group=models.ForeignKey(TableGroup,models.CASCADE)
+    location = models.CharField(max_length=50)
+    status = models.BooleanField(default=True)

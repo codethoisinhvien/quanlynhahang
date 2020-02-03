@@ -15,13 +15,18 @@ Including another URLconf
 """
 
 from django.urls import path
-from src.apis import FoodGroupApi,FoodApi
+
+from src.apis import FoodGroupApi, FoodApi
 from src.apis.table_group_api import TableGroupApi
+from src.apis.table_api import TableApi
+
 urlpatterns = [
-  path(r'food-group',FoodGroupApi.as_view(),name='food-group'),
-  path(r'food-group/<int:id>', FoodGroupApi.as_view(), name='food-group'),
-  path(r'foods', FoodApi.as_view(), name='foods'),
-  path(r'table-group', TableGroupApi.as_view(), name='tabele-groups'),
-  path(r'table-group/<int:id>', TableGroupApi.as_view(), name='table-group'),
+    path(r'food-group', FoodGroupApi.as_view(), name='food-group'),
+    path(r'food-group/<int:id>', FoodGroupApi.as_view(), name='food-group'),
+    path(r'foods', FoodApi.as_view(), name='foods'),
+    path(r'table-groups', TableGroupApi.as_view(), name='tabele-groups'),
+    path(r'table-groups/<int:id>', TableGroupApi.as_view(), name='table-group'),
+    path(r'tables', TableApi.as_view(), name='table-group'),
+    path(r'tables/<int:id>', TableApi.as_view(), name='table-group'),
 
 ]
