@@ -7,8 +7,9 @@ from src.serializers.bill_serializer import BillSerializer
 class BillAPI(APIView):
 
     def post(self, request):
-        bill_serializer = BillSerializer()
+        bill_serializer = BillSerializer(data=request.data)
         if bill_serializer.is_valid():
+
             bill_serializer.save()
             return Response({'success': True, 'bill': bill_serializer.data})
         else:
@@ -18,3 +19,5 @@ class BillAPI(APIView):
         bill = Bill.objects.filter()
         bill_serializer = BillSerializer(bill, many=True)
         return Response({'success': True, 'bills': bill_serializer.data})
+
+

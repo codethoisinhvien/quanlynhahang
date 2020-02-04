@@ -67,4 +67,5 @@ class BillDetail(TimeStampMixin):
     bill = models.ForeignKey(Bill, models.CASCADE)
     food = models.ForeignKey(Food, models.CASCADE)
     amount = models.IntegerField()
-    amount_complete = models.IntegerField()
+    amount_complete = models.IntegerField(default=0)
+    status=models.BooleanField(default=True)
