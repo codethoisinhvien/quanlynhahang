@@ -17,11 +17,13 @@ Including another URLconf
 from django.urls import path
 
 from src.apis import FoodGroupApi, FoodApi
+from src.apis.food_api import BestFood
 from src.apis.table_api import TableApi
 from src.apis.table_group_api import TableGroupApi
 from src.apis.customer_api import CustomersAPI
 from src.apis.bill_api import BillAPI
 from src.apis.bill_detail_api import BillDetail
+
 urlpatterns = [
     path(r'food-group', FoodGroupApi.as_view(), name='food-group'),
     path(r'food-group/<int:id>', FoodGroupApi.as_view(), name='food-group'),
@@ -35,5 +37,7 @@ urlpatterns = [
     path(r'bill', BillAPI.as_view(), name='bill'),
     path(r'bill-detail', BillDetail.as_view(), name='bill'),
     path(r'bill-detail/<int:id>', BillDetail.as_view(), name='bill'),
+
+    path(r'best-food', BestFood.as_view(), name='bill'),
 
 ]

@@ -17,3 +17,10 @@ class FoodUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Food
         fields = '__all__'
+class BestFoodSerializer(serializers.ModelSerializer):
+    food__name = serializers.CharField(max_length=50)
+    count = serializers.IntegerField()
+
+    class Meta:
+        model = Food
+        fields = (('food__name','count'))

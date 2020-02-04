@@ -2,9 +2,9 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.views import APIView, Response
 from django.db.models import Q
-from src.serializers.food_serializer import FoodSerializer,FoodUpdateSerializer
-from src.models import Food
-
+from src.serializers.food_serializer import FoodSerializer,FoodUpdateSerializer,BestFoodSerializer
+from src.models import Food,BillDetail
+from django.db.models import Sum
 
 class FoodApi(APIView):
     # @swagger_auto_schema(
@@ -49,3 +49,12 @@ class FoodApi(APIView):
 
         food_group = Food.objects.get(pk=id).delete()
         return Response({'success': True, 'message': "Xóa thành công"})
+class BestFood(APIView):
+     def get(self,request):
+        best_food= BillDetail.objects.values('food__name')\
+            .order_by('food').annotate(count=Sum('amount')).filter()
+        print(best_food)
+        best_food_serializer= BestFoodSerializer(best_food,many=True)
+        return Response({'success': True,
+                         'best_food':best_food_serializer.data
+                         })
