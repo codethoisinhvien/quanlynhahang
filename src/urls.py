@@ -17,9 +17,9 @@ Including another URLconf
 from django.urls import path
 
 from src.apis import FoodGroupApi, FoodApi
-from src.apis.table_group_api import TableGroupApi
 from src.apis.table_api import TableApi
-
+from src.apis.table_group_api import TableGroupApi
+from src.apis.customer_api import CustomersAPI
 urlpatterns = [
     path(r'food-group', FoodGroupApi.as_view(), name='food-group'),
     path(r'food-group/<int:id>', FoodGroupApi.as_view(), name='food-group'),
@@ -28,5 +28,7 @@ urlpatterns = [
     path(r'table-groups/<int:id>', TableGroupApi.as_view(), name='table-group'),
     path(r'tables', TableApi.as_view(), name='table-group'),
     path(r'tables/<int:id>', TableApi.as_view(), name='table-group'),
+    path(r'customers', CustomersAPI.as_view(), name='customers'),
+    path(r'customer/<int:id>', TableApi.as_view(), name='customer'),
 
 ]
