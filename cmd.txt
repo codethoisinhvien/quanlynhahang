@@ -1,5 +1,5 @@
-python3 manage.py runserver --settings=settings.settings
-python3 manage.py  makemigrations src  --settings=settings.settings
-python3 manage.py migrate src
-python3 manage.py runserver --settings=settings.local_settings
-python3 manage.py migrate src --settings=settings.local_settings
+python manage.py runserver --settings=settings.settings
+python manage.py  makemigrations src  --settings=settings.settings
+python manage.py migrate src
+python manage.py runserver --settings=settings.local_settings
+python manage.py migrate src --settings=settings.local_settings

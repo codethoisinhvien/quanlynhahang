@@ -22,6 +22,7 @@ from src.apis.table_group_api import TableGroupApi
 from src.apis.customer_api import CustomersAPI
 from src.apis.bill_api import BillAPI
 from src.apis.bill_detail_api import BillDetail
+from src.apis.employee_api import EmployeeApi
 urlpatterns = [
     path(r'food-group', FoodGroupApi.as_view(), name='food-group'),
     path(r'food-group/<int:id>', FoodGroupApi.as_view(), name='food-group'),
@@ -35,5 +36,6 @@ urlpatterns = [
     path(r'bill', BillAPI.as_view(), name='bill'),
     path(r'bill-detail', BillDetail.as_view(), name='bill'),
     path(r'bill-detail/<int:id>', BillDetail.as_view(), name='bill'),
+    path(r'employees',EmployeeApi.as_view(),name='employee')
 
 ]
