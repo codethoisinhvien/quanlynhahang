@@ -1,10 +1,10 @@
 from rest_framework.views import APIView, Response
 
-from src.models import Bill
-from src.serializers.bill_serializer import BillSerializer
+from src.models import Bill,BillDetail
+from src.serializers.bill_serializer import BillSerializer,BillDetailMoreSerializer
 
 
-class BillAPI(APIView):
+class BillsAPI(APIView):
 
     def post(self, request):
         bill_serializer = BillSerializer(data=request.data)
@@ -21,3 +21,11 @@ class BillAPI(APIView):
         return Response({'success': True, 'bills': bill_serializer.data})
 
 
+class BillAPI(APIView):
+    def get(self, request,id=None):
+        bill_detail = Bill.objects.get(pk=id)
+        bill_serializer = BillDetailMoreSerializer(bill_detail)
+        return Response({
+            'success': True,
+            'bill':bill_serializer.data
+        })

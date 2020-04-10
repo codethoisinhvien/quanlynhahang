@@ -22,8 +22,10 @@ class BillDetail(APIView):
             return Response({"success": True, 'bill_detail': bill_setail_serializer.validated_data})
         else:
             return Response({"success": False, 'bill_detail': bill_setail_serializer.error_messages})
-    def delete(self,request,id=None):
+
+    def delete(self, request, id=None):
         object = BillDetail.objects.get(pk=id)
-        object.status=False
+        object.status = False
         object.save()
-        return Response({'success':True,'message':'Xóa thành công'})
+        return Response({'success': True, 'message': 'Xóa thành công'})
+
