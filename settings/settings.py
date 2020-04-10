@@ -54,7 +54,16 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
-
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [(
+                      "redis://rediscloud:axLqZyuwSN01zxAuyzpjPk4DRQKeUwsq@redis-11674.c226.eu-west-1-3.ec2.cloud.redislabs.com",
+                      11674)],
+        },
+    },
+}
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -73,7 +82,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
+ASGI_APPLICATION = 'config.routing.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
