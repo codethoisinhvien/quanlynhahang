@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'drf_yasg',
+    'channels',
     'authentication',
     'src'
 ]
@@ -59,8 +59,8 @@ CHANNEL_LAYERS = {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             "hosts": [(
-                      "redis://rediscloud:axLqZyuwSN01zxAuyzpjPk4DRQKeUwsq@redis-11674.c226.eu-west-1-3.ec2.cloud.redislabs.com",
-                      11674)],
+                "redis://rediscloud:axLqZyuwSN01zxAuyzpjPk4DRQKeUwsq@redis-11674.c226.eu-west-1-3.ec2.cloud.redislabs.com",
+                11674)],
         },
     },
 }
