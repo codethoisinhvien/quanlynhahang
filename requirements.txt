@@ -5,5 +5,4 @@ mysqlclient
 gunicorn
 httplib2
 daphne
-drf-yasg
 channels
