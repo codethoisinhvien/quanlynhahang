@@ -85,22 +85,22 @@ WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.routing.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
+#mysql://b6bf90554358da:567e8bb3@eu-cdbr-west-03.cleardb.net/heroku_cdabdc4c39b1f6a?reconnect=true
 DATABASES = {
     'default': {
 
         'ENGINE': 'django.db.backends.mysql',
         # MySQL database host ip.
         # MySQL database host ip.
-        'HOST': 'eu-cdbr-west-02.cleardb.net',
+        'HOST': 'eu-cdbr-west-03.cleardb.net',
         # port number.
         'PORT': '3306',
         # database name.
-        'NAME': 'heroku_054d3526d2b6b7b',
+        'NAME': 'heroku_cdabdc4c39b1f6a',
         # user name.
-        'USER': 'bc981f7580442e',
+        'USER': 'b6bf90554358da',
         # password
-        'PASSWORD': 'dc386137',
+        'PASSWORD': '567e8bb3',
         # connect options
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", 'charset': 'utf8mb4'},
 
