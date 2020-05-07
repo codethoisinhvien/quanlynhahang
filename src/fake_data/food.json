@@ -1,0 +1,353 @@
+[
+  {
+    "name": "Lẩu mắm",
+    "price ": 1,
+    "status": true,
+    "price": 1,
+    "img ": "https://drive.google.com/file/d/16OFzk202IC-JKTIIQ6LzE_-0dhyUD5J2/view?usp=sharing",
+    "food_group": "Lẩu"
+  },
+  {
+    "name": "Lẩu thái chua cay",
+    "price ": 2,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1KItJyB80h3vSDF3lAFKs_yZ8dnUhmzgC/view?usp=sharing",
+    "food_group": "Lẩu"
+  },
+  {
+    "name": "Lẩu gà lá giang",
+    "price ": 3,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/17GpubAllk22FuqLy4CcBVmpUXfSAtd0q/view?usp=sharing",
+    "food_group": "Lẩu"
+  },
+  {
+    "name": "Lẩu gà ớt hiểm",
+    "price ": 4,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1pIJAHJoqlD_OqLEQdZc2FyVGURdCpmBq/view?usp=sharing",
+    "food_group": "Lẩu"
+  },
+  {
+    "name": "Lẩu bò",
+    "price ": 5,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1lx664tLTcloNCJq_1UMgKYvKbhyUimyh/view?usp=sharing",
+    "food_group": "Lẩu"
+  },
+  {
+    "name": "Lẩu cá kèo",
+    "price ": 6,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/13lF_cdrRbO3YF8HFOUk4pG8WdBiVAf-z/view?usp=sharing",
+    "food_group": "Lẩu"
+  },
+  {
+    "name": "Lẩu ếch măng chua",
+    "price ": 7,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1NvXE4nR3f6TRmkjw6Ac8uyNJot7c7GRn/view?usp=sharing",
+    "food_group": "Lẩu"
+  },
+  {
+    "name": "Lẩu cua đồng",
+    "price ": 8,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/12Aszxe-73Lix19YuSfcEcKYzdyTY3HmG/view?usp=sharing",
+    "food_group": "Lẩu"
+  },
+  {
+    "name": "Lẩu ghẹ",
+    "price ": 9,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1bk3WxlBQlzUep67KDezuRr7qWUWRi-2l/view?usp=sharing",
+    "food_group": "Lẩu"
+  },
+  {
+    "name": "Lẩu lươn chua cay",
+    "price ": 10,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1vnM0GY1eW_skdfVO4VPHo9RhwJ7_uujN/view?usp=sharing",
+    "food_group": "Lẩu"
+  },
+  {
+    "name": "NẦM NƯỚNG CHAO",
+    "price ": 11,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/184MPciIUSnBBMJX32O9I_eSxKvJt90k7/view?usp=sharing",
+    "food_group": "Nướng"
+  },
+  {
+    "name": "LÒNG HEO NƯỚNG SA TẾ",
+    "price ": 12,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1JDFIhf6-n3ZL7HxC_eIGIEwjy1UFmiRl/view?usp=sharing",
+    "food_group": "Nướng"
+  },
+  {
+    "name": "SƯỜN NƯỚNG BBQ",
+    "price ": 13,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/15DcXdMHLHGl2H2-fhv8grRJzriCeynBv/view?usp=sharing",
+    "food_group": "Nướng"
+  },
+  {
+    "name": "CÁNH GÀ NƯỚNG MUỐI ỚT",
+    "price ": 14,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1LpQc74LQx6qm28wLJiPEpa_z74uGYZMf/view?usp=sharing",
+    "food_group": "Nướng"
+  },
+  {
+    "name": "SƯỜN DÊ NƯỚNG CHAO",
+    "price ": 15,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1_5dsnzCBP87PmOXgxo-w4QZ-fXwN2CjE/view?usp=sharing",
+    "food_group": "Nướng"
+  },
+  {
+    "name": "CÁ RÔ PHI NƯỚNG GIẤY BẠC",
+    "price ": 16,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1HF0H0ExG2r7anbcIJszaQM6tk8pYLXj7/view?usp=sharing",
+    "food_group": "Nướng"
+  },
+  {
+    "name": "THỊT BÒ XIÊN NƯỚNG RAU CỦ",
+    "price ": 17,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1h1B7gb2P9ZfOaFS4ocupkTK9-41d29q-/view?usp=sharing",
+    "food_group": "Nướng"
+  },
+  {
+    "name": "BENZOCAINE,ALCOHOL",
+    "price ": 18,
+    "status": true,
+    "img ": "https://robohash.org/occaecatiimpeditnumquam.png?size=50x50&set=set1",
+    "food_group": "Nướng"
+  },
+  {
+    "name": "TÔM HÙM NƯỚNG PHÔ MAI",
+    "price ": 19,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1r_blfZ80ooV00MSG1CHrPXSBi9SYZv7H/view?usp=sharing",
+    "food_group": "Nướng"
+  },
+  {
+    "name": "MỰC NƯỚNG SA TẾ",
+    "price ": 20,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1baY_W3f4NzUaGmk8DEYZjf9sRD0vk0iN/view?usp=sharing",
+    "food_group": "Nướng"
+  },
+  {
+    "name": "BÒ CUỘN NẤM KIM CHÂM",
+    "price ": 21,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1pF7ctB1QxfITCsYZq5upUJw3HszKCeT4/view?usp=sharing",
+    "food_group": "Cơm"
+  },
+  {
+    "name": "Cơm chiên mực",
+    "price ": 22,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/13iOypOOYLSmGjc2nfIAHH3-pIDO5-blf/view?usp=sharing",
+    "food_group": "Cơm"
+  },
+  {
+    "name": "Cơm chiên dưa bò",
+    "price ": 23,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1CywKqK9fOlj5L7tJcr8cWqUxPsWd9kRL/view?usp=sharing",
+    "food_group": "Cơm"
+  },
+  {
+    "name": "Cơm chiên trái thơm ",
+    "price ": 24,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1h4aw5DIgpcpMTG2pvRltf2IoROTsfYn7/view?usp=sharing",
+    "food_group": "Cơm"
+  },
+  {
+    "name": "Cơm chiên kiểu Thái",
+    "price ": 25,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1I_Wg5vDoiBaCL4v6_UruJWyDVUQgcwVJ/view?usp=sharing",
+    "food_group": "Cơm"
+  },
+  {
+    "name": " Cơm chiên tôm",
+    "price ": 26,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1tXvJMR_GcJWLyCSotal30aiW77JACAep/view?usp=sharing",
+    "food_group": "Cơm"
+  },
+  {
+    "name": "Cơm chiên tỏi",
+    "price ": 27,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1nmaemCRlnmRfoWSbTXHiDvMWoTV-nsAy/view?usp=sharing",
+    "food_group": "Cơm"
+  },
+  {
+    "name": "Cơm chiên Dương Châu",
+    "price ": 28,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1sK8boTSGzYxUVlrvUQn1k1-Ue40Ny-tA/view?usp=sharing",
+    "food_group": "Cơm"
+  },
+  {
+    "name": "Cơm chiên trứng cuộn",
+    "price ": 29,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/16QSVyTR2a56RTY_b98xOVNXzm9LiZOJw/view?usp=sharing",
+    "food_group": "Cơm"
+  },
+  {
+    "name": "Cơm chiên phô mai",
+    "price ": 30,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1makmVjG9SNPxHZ1QbY1uGmOzRb05YE_9/view?usp=sharing",
+    "food_group": "Cơm"
+  },
+  {
+    "name": "Bún sườn chua",
+    "price ": 31,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/19Gw4w6GECDG0sNmlDytnO-Um5bs0mYo1/view?usp=sharing",
+    "food_group": "Bún"
+  },
+  {
+    "name": "Bún măng sườn",
+    "price ": 32,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1c0EllvnAxX2Q8wy1vEDqq25gvOXmIWLm/view?usp=sharing",
+    "food_group": "Bún"
+  },
+  {
+    "name": "Bún ốc",
+    "price ": 33,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1vI44nI3l0bYX-caTUOs7gvNiH9nLegCW/view?usp=sharing",
+    "food_group": "Bún"
+  },
+  {
+    "name": "Bún riêu cua",
+    "price ": 34,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1-qldycA87K_pi5etntvl35i3fyF5VyUn/view?usp=sharing",
+    "food_group": "Bún"
+  },
+  {
+    "name": "Bún gà",
+    "price ": 35,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/16Ls_pcy8xyFyH6qpKtqoZhHOr3q2kpdN/view?usp=sharing",
+    "food_group": "Bún"
+  },
+  {
+    "name": "Bún hải sản",
+    "price ": 36,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1w5J4rA_-O0OZDRgkv4DUt80cso8JjoPu/view?usp=sharing",
+    "food_group": "Bún"
+  },
+  {
+    "name": "Bún mắm",
+    "price ": 37,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1OnWQNzWo5LrnPv1XXFTj-oJwaDpc68NF/view?usp=sharing",
+    "food_group": "Bún"
+  },
+  {
+    "name": "Bún ngan",
+    "price ": 38,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1BPVVuOINx7U_ZPu9Rrxk9_W8j2l-tuXA/view?usp=sharing",
+    "food_group": "Bún"
+  },
+  {
+    "name": "Bún bò Huế",
+    "price ": 39,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1jsB5p3-uy1ORbuw9vAIAXbMLKvy3rQWk/view?usp=sharing",
+    "food_group": "Bún"
+  },
+  {
+    "name": "Bún dọc mùng",
+    "price ": 40,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1z-ORzePxFkrY4Pr0J0KsbHA3goc2IFvu/view?usp=sharing",
+    "food_group": "Bún"
+  },
+  {
+    "name": "Phở Hà Nội",
+    "price ": 41,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1VgDIZm3oNNFnfB7uH_R4lRyTC51fUATJ/view?usp=sharing",
+    "food_group": "Phở"
+  },
+  {
+    "name": "Phở cuốn Hà Nội",
+    "price ": 42,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1vQY9PhnNS3bBes3YG0WYxTL6Qk7Iicgh/view?usp=sharing",
+    "food_group": "Phở"
+  },
+  {
+    "name": "Phở gà",
+    "price ": 43,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1d6Kq5J0R5L_OPLqsWCc8EA8yANd4IXUK/view?usp=sharing",
+    "food_group": "Phở"
+  },
+  {
+    "name": "Phở chua",
+    "price ": 44,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/14RX93TRzInQBZ6Nr1LGTr_o-LgioFSjX/view?usp=sharing",
+    "food_group": "Phở"
+  },
+  {
+    "name": "Phở chay",
+    "price ": 45,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/18ox58_TpILboThZDKWItJm6qfQKvFc8q/view?usp=sharing",
+    "food_group": "Phở"
+  },
+  {
+    "name": "Phở chiên phồng",
+    "price ": 46,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1NrOaYCP0826y6nDiBPJ-aBFI5fzHged8/view?usp=sharing",
+    "food_group": "Phở"
+  },
+  {
+    "name": "Phở nạm bò",
+    "price ": 47,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/12qndlwEQJOmPA_h6M1EIFQclKauZoXTV/view?usp=sharing",
+    "food_group": "Phở"
+  },
+  {
+    "name": "Phở bò tái",
+    "price ": 48,
+    "status": false,
+    "img ": "https://drive.google.com/file/d/1gPLH0EPza0U_El6r__lstBBODLcSe7YM/view?usp=sharing",
+    "food_group": "Phở"
+  },
+  {
+    "name": "Phở bắp bò",
+    "price ": 49,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1EBsCTzo1x8y3Ph3a545JcZER1LsMXMBW/view?usp=sharing",
+    "food_group": "Phở"
+  },
+  {
+    "name": "Phở gà trộn",
+    "price ": 50,
+    "status": true,
+    "img ": "https://drive.google.com/file/d/1FLz8bxEA0RTaZf80VT94d6GkXwW9R6lo/view?usp=sharing",
+    "food_group": "Phở"
+  }
+]
