@@ -6,7 +6,7 @@ class CustomersAPI(APIView):
         customer_serializer= CustomerSerializer(data=request.data)
         if customer_serializer.is_valid():
             customer_serializer.save()
-            return  Response({'success':True,'customer':customer_serializer.data})
+            return  Response({'success':True,'data':customer_serializer.data})
         else:
             return Response({'success': False, 'message': customer_serializer.error_messages})
 

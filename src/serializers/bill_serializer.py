@@ -1,18 +1,25 @@
 from rest_framework import serializers
-
-from src.models import Bill
+from django.db.models import Q
+from src.models import Bill, Customer
 from .bill_detail_serializer import BillDetailSerializer
 from .table_serializer import TableSerializer
+from .customer_serializer import CustomerSerializer
 
 
 class BillSerializer(serializers.ModelSerializer):
+    customer = serializers.SerializerMethodField("get_customer")
+
     class Meta:
         model = Bill
+        fields = ['table', 'customer', 'status']
 
-    def get_food_name(self, obj):
-        return obj.food.name
+    def get_customer(self, obj):
+        # print(obj.id)
+        condition = Q(pk=obj.customer.id)
 
-    fields = '__all__'
+        customer = Customer.objects.get(pk=obj.customer.id)
+        customerS = CustomerSerializer(customer, many=False)
+        return customerS.data
 
 
 class BillDetailMoreSerializer(serializers.ModelSerializer):
