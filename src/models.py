@@ -51,20 +51,10 @@ class TimeStampMixin(models.Model):
 
 
 class Bill(TimeStampMixin):
-    Paid = 'PA'
-    Pending = 'PE'
-    NotPaid = 'NP'
-    Order = 'OR'
-    Nstatus = (
-        (Paid, 'Paid'),
-        (Pending, 'Pending'),
-        (NotPaid, 'Not Paid'),
-        (Order, 'Order')
 
-    )
     table = models.ForeignKey(Table, models.CASCADE)
     customer = models.ForeignKey(Customer, models.CASCADE)
-    status = models.CharField(choices=Nstatus, max_length=2, default=NotPaid)
+    status = models.CharField( max_length=2)
 
 
 class BillDetail(TimeStampMixin):

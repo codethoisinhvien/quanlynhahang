@@ -7,7 +7,6 @@ from src.serializers.bill_serializer import BillSerializer, BillDetailMoreSerial
 class BillsAPI(APIView):
 
     def post(self, request):
-        print(request.data)
 
         bill_serializer = BillSerializer(data=request.data)
         if bill_serializer.is_valid():
