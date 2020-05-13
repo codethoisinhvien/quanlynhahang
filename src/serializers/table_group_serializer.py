@@ -9,7 +9,7 @@ class TableGroupSerializer(serializers.ModelSerializer):
         model = TableGroup
         fields = '__all__'
 
-    def get_list_food(self, obj):
+    def get_list_table(self, obj):
         # print(obj.id)
         food = Table.objects.filter(table_group=obj.id)
         food_serializer = TableSerializer(food, many=True)
