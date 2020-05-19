@@ -1,6 +1,6 @@
 from rest_framework.views import APIView, Response
 
-from src.models import Bill, Customer, Table
+from src.models import Bill
 from src.serializers.bill_serializer import BillSerializer, BillDetailMoreSerializer
 
 
@@ -30,3 +30,20 @@ class BillAPI(APIView):
             'success': True,
             'bill': bill_serializer.data
         })
+
+    def put(self, request, id=None):
+        bill_detail = Bill.objects.get(pk=id)
+        bill_detail.status = request.data["status"]
+        try:
+            bill_detail.save()
+            bill_serializer = BillDetailMoreSerializer(bill_detail)
+            return Response({
+                'success': True,
+                'message': "Thành công",
+                'data': bill_serializer.data
+            })
+        except:
+            return Response({
+                'success': False,
+                'message': "Thất bại"
+            })

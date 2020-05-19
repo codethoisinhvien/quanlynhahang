@@ -10,7 +10,7 @@ class BillSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Bill
-        fields = ['table', 'customer', 'status']
+        fields = ['table', 'customer', 'status','id']
 
 
 
