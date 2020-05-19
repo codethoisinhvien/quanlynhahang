@@ -6,7 +6,7 @@ from src.serializers.bill_detail_serializer import BillDetailSerializer
 
 class BillDetail(APIView):
     def post(self, request):
-        bill_setail_serializer = BillDetailSerializer(data=request.data)
+        bill_setail_serializer = BillDetailSerializer(data=request.data,many=True)
         if bill_setail_serializer.is_valid():
             bill_setail_serializer.save()
             return Response({"success": True, 'bill_detail': bill_setail_serializer.data})
