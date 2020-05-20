@@ -4,7 +4,7 @@ import sys
 from django.db import migrations, models
 import django.db.models.deletion
 
-sys.getfilesystemencoding()
+
 class Migration(migrations.Migration):
 
     initial = True
