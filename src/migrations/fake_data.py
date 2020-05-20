@@ -1,9 +1,10 @@
 import json
+import sys
 
 from django.db import migrations
 
 from src.models import FoodGroup, Food,TableGroup,Table
-
+sys.getfilesystemencoding()
 
 def fake_food_group(apps, schema_editor):
     # pass

@@ -87,6 +87,7 @@ ASGI_APPLICATION = 'config.routing.application'
 #mysql://b6bf90554358da:567e8bb3@eu-cdbr-west-03.cleardb.net/heroku_cdabdc4c39b1f6a?reconnect=true
 DATABASES = {
 # b389c51cbab589:1e546445@eu-cdbr-west-03.cleardb.net/heroku_f69c089a84a2606?reconnect=true
+
     'default': {
 
         'ENGINE': 'django.db.backends.mysql',
