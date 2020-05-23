@@ -32,6 +32,13 @@ class Office(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
 
+class User(models.Model):
+    username = models.CharField(max_length=50, unique=True)
+    password = models.CharField(max_length=50, unique=True)
+    full_name = models.CharField(max_length=100)
+    office = models.ForeignKey(Office, models.CASCADE)
+
+
 class Emloyee(models.Model):
     full_name = models.CharField(max_length=100)
     office = models.ForeignKey(Office, models.CASCADE)
@@ -51,10 +58,9 @@ class TimeStampMixin(models.Model):
 
 
 class Bill(TimeStampMixin):
-
     table = models.ForeignKey(Table, models.CASCADE)
     customer = models.ForeignKey(Customer, models.CASCADE)
-    status = models.CharField( max_length=2)
+    status = models.CharField(max_length=2)
 
 
 class BillDetail(TimeStampMixin):
