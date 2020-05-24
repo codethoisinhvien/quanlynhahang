@@ -34,7 +34,7 @@ class Office(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=50, unique=True)
-    password = models.CharField(max_length=50, unique=True)
+    password = models.CharField(max_length=50)
     full_name = models.CharField(max_length=100)
     office = models.ForeignKey(Office, models.CASCADE)
 
