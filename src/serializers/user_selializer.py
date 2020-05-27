@@ -4,7 +4,7 @@ from src.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    office = serializers.SerializerMethodField('get_office')
+    office_name = serializers.SerializerMethodField('get_office')
 
     class Meta:
         model = User

@@ -24,14 +24,15 @@ from src.apis.food_api import BestFood
 from src.apis.office_api import OfficeApi
 from src.apis.table_api import TableApi
 from src.apis.table_group_api import TableGroupApi
-from src.apis.user_api import UserApi
+from src.apis.user_api import UsersApi,UserApi
 from src.apis.authentication import AuthenticationApi
 urlpatterns = [
     path(r'login', AuthenticationApi.as_view(), name='authentication'),
     path(r'food-group', FoodGroupApi.as_view(), name='food-group'),
     path(r'food-group/<int:id>', FoodGroupApi.as_view(), name='food-group'),
-    path(r'users', UserApi.as_view(), name='users'),
-    path(r'foods', FoodApi.as_view(), name='foods'),
+    path(r'users', UsersApi.as_view(), name='users'),
+    path(r'users/<int:id>', UserApi.as_view(), name='user'),
+    path(r'foods/<int:id>', FoodApi.as_view(), name='foods'),
     path(r'table-groups', TableGroupApi.as_view(), name='tabele-groups'),
     path(r'table-groups/<int:id>', TableGroupApi.as_view(), name='table-group'),
     path(r'tables', TableApi.as_view(), name='table-group'),
