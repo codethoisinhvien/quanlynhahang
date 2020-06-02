@@ -58,8 +58,8 @@ CHANNEL_LAYERS = {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             "hosts": [(
-                "redis://rediscloud:axLqZyuwSN01zxAuyzpjPk4DRQKeUwsq@redis-11674.c226.eu-west-1-3.ec2.cloud.redislabs.com",
-                11674)],
+                "45.32.23.158",
+                6379)],
         },
     },
 }

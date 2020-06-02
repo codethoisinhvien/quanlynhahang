@@ -20,7 +20,7 @@ class FoodUpdateSerializer(serializers.ModelSerializer):
 class BestFoodSerializer(serializers.ModelSerializer):
     food__name = serializers.CharField(max_length=50)
     count = serializers.IntegerField()
-
+    count_complete = serializers.IntegerField()
     class Meta:
         model = Food
-        fields = (('food__name','count'))
+        fields = (('food__name','count','count_complete'))

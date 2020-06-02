@@ -1,7 +1,7 @@
 
 from rest_framework.views import APIView, Response
 
-from src.models import Bill
+from src.models import Bill,Table,Customer
 from src.serializers.bill_serializer import BillSerializer, BillDetailMoreSerializer
 
 
@@ -9,13 +9,14 @@ class BillsAPI(APIView):
 
     def post(self, request):
 
-        bill_serializer = BillSerializer(data=request.data,many=True)
+        # data= {'table':table,'custumer':customer,'status':"or"}
+        bill_serializer = BillSerializer(data=request.data,many=True),
         if bill_serializer.is_valid():
 
             bill_serializer.save()
             return Response({'success': True, 'bill': bill_serializer.data})
         else:
-            return Response({'success': False, 'message': BillSerializer.data})
+            return Response({'success': False, 'message': BillSerializer.errors})
 
     def get(self, request):
         bill = Bill.objects.filter()
