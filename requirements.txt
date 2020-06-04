@@ -6,3 +6,4 @@ gunicorn
 httplib2
 daphne
 channels
+channels_redis
