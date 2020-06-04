@@ -16,9 +16,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
         await self.accept()
-        best_food = BillDetail.objects.values('food__name') \
+        best_food = BillDetail.objects.values('food__name', 'food') \
             .order_by('food').annotate(count=Sum('amount'), count_complete=Sum('amount_complete')).filter()
         print(best_food)
+        best_food_serializer = BestFoodSerializer(best_food, many=True)
         best_food_serializer = BestFoodSerializer(best_food, many=True)
         await self.channel_layer.group_send(
             self.room_group_name,
@@ -35,8 +36,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # text_data_json = json.loads(text_data)
         # message = text_data_json['message']
         # print(text_data)
-        best_food = BillDetail.objects.values('food__name') \
-            .order_by('food').annotate(count=Sum('amount'),count_complete=Sum('amount_complete')).filter()
+        best_food = BillDetail.objects.values('food__name', 'food') \
+            .order_by('food').annotate(count=Sum('amount'), count_complete=Sum('amount_complete')).filter()
         print(best_food)
         best_food_serializer = BestFoodSerializer(best_food, many=True)
         await self.channel_layer.group_send(
