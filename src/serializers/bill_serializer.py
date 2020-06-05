@@ -10,7 +10,8 @@ class BillSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Bill
-        fields = ['table', 'customer', 'status','id']
+        read_only_fields = ['id']
+        fields = '__all__'
 
 
 

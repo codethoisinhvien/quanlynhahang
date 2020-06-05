@@ -10,7 +10,8 @@ class BillsAPI(APIView):
     def post(self, request):
 
         # data= {'table':table,'custumer':customer,'status':"or"}
-        bill_serializer = BillSerializer(data=request.data,many=True),
+        print(request.data)
+        bill_serializer = BillSerializer(data=request.data,many=True)
         if bill_serializer.is_valid():
 
             bill_serializer.save()
