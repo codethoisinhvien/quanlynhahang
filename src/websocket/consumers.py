@@ -19,7 +19,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
         await self.accept()
-        if self.room_name == "order":
+        if self.room_name == "chef":
             best_food = BillDetail.objects.values('food__name', 'food') \
                 .order_by('food').annotate(count=Sum('amount'), count_complete=Sum('amount_complete')).filter()
             best_food_serializer = BestFoodSerializer(best_food, many=True)
