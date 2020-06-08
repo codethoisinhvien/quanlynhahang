@@ -8,9 +8,10 @@ from src.models import BillDetail, ChefBill
 from src.serializers.bill_detail_serializer import BillDetailSerializer
 from src.serializers.chef_bill_serializer import ChefBillSerializer
 from src.serializers.food_serializer import BestFoodSerializer
-
+from channels.db import database_sync_to_async
 
 class ChatConsumer(AsyncWebsocketConsumer):
+    @database_sync_to_async
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
@@ -33,9 +34,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
         elif self.room_name == "delivery":
             pass
 
+    @database_sync_to_async
     async def disconnect(self, close_code):
         pass
 
+    @database_sync_to_async
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         data = text_data_json['data']
@@ -80,6 +83,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
             ))
 
+    @database_sync_to_async
     async def chat_message(self, event):
         message = event['message']
         print(message)
