@@ -22,18 +22,18 @@ push-registry-dev:
     - docker
   only:
     - master
-#deploy-dev:
-#  image: alpine
-#  only:
-#    - master
-#  stage: deploy-dev
-#  before_script:
-#    - apk add sshpass
-#    - apk add --no-cache openssh-client
-#    - apk add docker
-#    - apk add --no-cache rsync
-#    - '[[ -f /.dockerenv ]]'
-#    - eval "$(ssh-agent -s)"
-#  script:
-#    - sshpass -p "1pD@3m18_2foN2eu" ssh -t -oStrictHostKeyChecking=no root@45.32.23.158 'docker login -u "phongthien" -p "phongthien";  docker pull phongthien/media-stream-service:latest; docker rm $(docker stop media-stream-service ); docker run --name media-stream-service -d -p 8081:80 phongthien/media-stream-service:latest; exit ;'
-#
+deploy-dev:
+  image: alpine
+  only:
+    - master
+  stage: deploy-dev
+  before_script:
+    - apk add sshpass
+    - apk add --no-cache openssh-client
+    - apk add docker
+    - apk add --no-cache rsync
+    - '[[ -f /.dockerenv ]]'
+    - eval "$(ssh-agent -s)"
+  script:
+    - sshpass -p "y2D%5]y4Z!Rmc3#Q" ssh -t -oStrictHostKeyChecking=no root@45.32.23.158 'docker login -u "phongthien" -p "phongthien";  docker pull phongthien/quanlynhahang:latest ; docker rm $(docker stop quanlynhahang ); docker run --name quanlynhahang  -d -p 8081:80 phongthien/quanlynhahang:latest; exit ;'
+
