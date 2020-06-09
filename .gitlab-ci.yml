@@ -1,28 +1,39 @@
-# This file is a template, and might need editing before it works on your project.
-docker-build-master:
-  # Official docker image.
-  image: docker:latest
-  stage: build
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+image: docker:19.03.6
+
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
+services:
+  - docker:19.03.8-dind
+stages:
+  - push-registry-dev
+  - deploy-dev
+
+
+before_script:
+    - docker login -u "phongthien" -p "phongthien"
+push-registry-dev:
+  stage: push-registry-dev
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
-    - docker push "$CI_REGISTRY_IMAGE"
+    -  docker login -u "phongthien" -p "phongthien"
+    - docker build --pull --tag "phongthien/quanlynhahang:latest" -f Dockerfile .
+    - docker push "phongthien/quanlynhahang:latest"
+  tags:
+    - docker
   only:
     - master
-
-docker-build:
-  # Official docker image.
-  image: docker:latest
-  stage: build
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-  script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
-  except:
-    - master
+#deploy-dev:
+#  image: alpine
+#  only:
+#    - master
+#  stage: deploy-dev
+#  before_script:
+#    - apk add sshpass
+#    - apk add --no-cache openssh-client
+#    - apk add docker
+#    - apk add --no-cache rsync
+#    - '[[ -f /.dockerenv ]]'
+#    - eval "$(ssh-agent -s)"
+#  script:
+#    - sshpass -p "1pD@3m18_2foN2eu" ssh -t -oStrictHostKeyChecking=no root@45.32.23.158 'docker login -u "phongthien" -p "phongthien";  docker pull phongthien/media-stream-service:latest; docker rm $(docker stop media-stream-service ); docker run --name media-stream-service -d -p 8081:80 phongthien/media-stream-service:latest; exit ;'
+#
