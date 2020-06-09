@@ -1,6 +1,7 @@
 import json
 from itertools import product
 
+from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.db.models import Sum
 
@@ -8,10 +9,10 @@ from src.models import BillDetail, ChefBill
 from src.serializers.bill_detail_serializer import BillDetailSerializer
 from src.serializers.chef_bill_serializer import ChefBillSerializer
 from src.serializers.food_serializer import BestFoodSerializer
-from channels.db import database_sync_to_async
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
-    @database_sync_to_async
+
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
@@ -21,8 +22,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
         await self.accept()
         if self.room_name == "chef":
-            best_food = BillDetail.objects.values('food__name', 'food') \
-                .order_by('food').annotate(count=Sum('amount'), count_complete=Sum('amount_complete')).filter()
+            best_food = await self.conention_query()
+            print(best_food)
             best_food_serializer = BestFoodSerializer(best_food, many=True)
             await self.channel_layer.group_send(
                 self.room_group_name,
@@ -35,10 +36,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
             pass
 
     @database_sync_to_async
+    def conention_query(self):
+
+        return BillDetail.objects.values('food__name', 'food') \
+            .order_by('food').annotate(count=Sum('amount'), count_complete=Sum(
+            'amount_complete')).filter()
+
     async def disconnect(self, close_code):
         pass
 
-    @database_sync_to_async
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         data = text_data_json['data']
@@ -47,15 +53,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
         if self.room_name == "order":
             bill_detail_serializer = BillDetailSerializer(data=data, many=True)
             if bill_detail_serializer.is_valid():
-                bill_detail_serializer.save()
+                await database_sync_to_async(bill_detail_serializer.save())()
                 print("thanh cong")
                 await self.send(text_data=json.dumps(
                     {"success": True, "type": "confirm", 'bill_detail': bill_detail_serializer.data},
                     ensure_ascii=False
 
                 ))
-            best_food = BillDetail.objects.values('food__name', 'food') \
-                .order_by('food').annotate(count=Sum('amount'), count_complete=Sum('amount_complete')).filter()
+            best_food = await database_sync_to_async(BillDetail.objects.values('food__name', 'food') \
+                                                     .order_by('food').annotate(count=Sum('amount'),
+                                                                                count_complete=Sum(
+                                                                                    'amount_complete')).filter())()
             best_food_serializer = BestFoodSerializer(best_food, many=True)
             await self.channel_layer.group_send(
                 "chef",
@@ -67,8 +75,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         elif self.room_name == "chef":
             chef_cook(data)
-            query = ChefBill.objects.all()
-            chef_bill_serializer = ChefBillSerializer(query,many=True)
+            query = await database_sync_to_async(ChefBill.objects.all())()
+            chef_bill_serializer = ChefBillSerializer(query, many=True)
             print(chef_bill_serializer.data)
             await self.channel_layer.group_send(
                 "delivery",
@@ -83,7 +91,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
             ))
 
-    @database_sync_to_async
     async def chat_message(self, event):
         message = event['message']
         print(message)
@@ -119,3 +126,7 @@ def chef_cook(data):
         print(queryset[0].amount_complete, queryset[0].amount_complete)
 
         # while amount>0:
+
+
+def connect_query():
+    pass

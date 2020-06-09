@@ -84,51 +84,53 @@ WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.routing.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-#mysql://b6bf90554358da:567e8bb3@eu-cdbr-west-03.cleardb.net/heroku_cdabdc4c39b1f6a?reconnect=true
+# mysql://b6bf90554358da:567e8bb3@eu-cdbr-west-03.cleardb.net/heroku_cdabdc4c39b1f6a?reconnect=true
 DATABASES = {
 
-    #mysql://baa8c17652c072:7a78290d@eu-cdbr-west-03.cleardb.net/heroku_ea7c41c0bb52e0c?reconnect=true
-# b389c51cbab589:1e546445@eu-cdbr-west-03.cleardb.net/heroku_f69c089a84a2606?reconnect=true
+    # mysql://baa8c17652c072:7a78290d@eu-cdbr-west-03.cleardb.net/heroku_ea7c41c0bb52e0c?reconnect=true
+    # b389c51cbab589:1e546445@eu-cdbr-west-03.cleardb.net/heroku_f69c089a84a2606?reconnect=true
 
     'default': {
 
         'ENGINE': 'django.db.backends.mysql',
         # MySQL database host ip.
         # MySQL database host ip.
-        'HOST': 'eu-cdbr-west-03.cleardb.net',
+        'HOST': '45.32.23.158',
         # port number.
-        'PORT': '3306',
+        'PORT': '3307',
         # database name.
-        'NAME': 'heroku_ea7c41c0bb52e0c',
+        'NAME': 'quanlynhahang',
         # user name.
-        'USER': 'baa8c17652c072',
+        'USER': 'root',
         # password
-        'PASSWORD': '7a78290d',
+        'PASSWORD': 'password',
         # connect options
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
             'charset': 'utf8',
-            'use_unicode': True},
+            'use_unicode': True
+            # 'timeout': 20,
+        },
 
     },
-# 'default': {
-#
-#         'ENGINE': 'django.db.backends.mysql',
-#         # MySQL database host ip.
-#         # MySQL database host ip.
-#         'HOST': '127.0.0.1',
-#         # port number.
-#         'PORT': '3306',
-#         # database name.
-#         'NAME': 'quanlynhahang',
-#         # user name.
-#         'USER': 'root',
-#         # password
-#         'PASSWORD': '',
-#         # connect options
-#         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", 'charset': 'utf8mb4'},
-#
-#     }
+    # 'default': {
+    #
+    #         'ENGINE': 'django.db.backends.mysql',
+    #         # MySQL database host ip.
+    #         # MySQL database host ip.
+    #         'HOST': '127.0.0.1',
+    #         # port number.
+    #         'PORT': '3306',
+    #         # database name.
+    #         'NAME': 'quanlynhahang',
+    #         # user name.
+    #         'USER': 'root',
+    #         # password
+    #         'PASSWORD': '',
+    #         # connect options
+    #         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", 'charset': 'utf8mb4'},
+    #
+    #     }
 
 }
 
