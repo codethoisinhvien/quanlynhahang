@@ -1,7 +1,5 @@
 import json
-from itertools import product
 
-from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.db.models import Sum
 
@@ -35,7 +33,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         elif self.room_name == "delivery":
             pass
 
-    @database_sync_to_async
     def conention_query(self):
 
         return BillDetail.objects.values('food__name', 'food') \
@@ -61,9 +58,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
                 ))
             best_food = BillDetail.objects.values('food__name', 'food') \
-                                                     .order_by('food').annotate(count=Sum('amount'),
-                                                                                count_complete=Sum(
-                                                                                    'amount_complete')).filter()
+                .order_by('food').annotate(count=Sum('amount'),
+                                           count_complete=Sum(
+                                               'amount_complete')).filter()
             best_food_serializer = BestFoodSerializer(best_food, many=True)
             await self.channel_layer.group_send(
                 "chef",
