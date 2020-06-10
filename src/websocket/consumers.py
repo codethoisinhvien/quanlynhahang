@@ -45,18 +45,27 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         data = text_data_json['data']
-        print(text_data_json)
-
+        print( self.room_name == "order")
+        print(data[0])
         if self.room_name == "order":
             bill_detail_serializer = BillDetailSerializer(data=data, many=True)
+            print("thanh cong")
             if bill_detail_serializer.is_valid():
                 bill_detail_serializer.save()
-                print("thanh cong")
+
                 await self.send(text_data=json.dumps(
                     {"success": True, "type": "confirm", 'bill_detail': bill_detail_serializer.data},
                     ensure_ascii=False
 
                 ))
+            else:
+                print(bill_detail_serializer.error_messages)
+                await self.send(text_data=json.dumps(
+                    {"success": True, "type": "confirm", 'message': "cos loi"},
+                    ensure_ascii=False
+
+                ))
+
             best_food = BillDetail.objects.values('food__name', 'food') \
                 .order_by('food').annotate(count=Sum('amount'),
                                            count_complete=Sum(
