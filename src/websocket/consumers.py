@@ -53,17 +53,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
         if self.room_name == "order":
             bill_detail_serializer = BillDetailSerializer(data=data, many=True)
             if bill_detail_serializer.is_valid():
-                await database_sync_to_async(bill_detail_serializer.save())()
+                bill_detail_serializer.save()
                 print("thanh cong")
                 await self.send(text_data=json.dumps(
                     {"success": True, "type": "confirm", 'bill_detail': bill_detail_serializer.data},
                     ensure_ascii=False
 
                 ))
-            best_food = await database_sync_to_async(BillDetail.objects.values('food__name', 'food') \
+            best_food = BillDetail.objects.values('food__name', 'food') \
                                                      .order_by('food').annotate(count=Sum('amount'),
                                                                                 count_complete=Sum(
-                                                                                    'amount_complete')).filter())()
+                                                                                    'amount_complete')).filter()
             best_food_serializer = BestFoodSerializer(best_food, many=True)
             await self.channel_layer.group_send(
                 "chef",
@@ -75,7 +75,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         elif self.room_name == "chef":
             chef_cook(data)
-            query = await database_sync_to_async(ChefBill.objects.all())()
+            query = ChefBill.objects.all()
             chef_bill_serializer = ChefBillSerializer(query, many=True)
             print(chef_bill_serializer.data)
             await self.channel_layer.group_send(
