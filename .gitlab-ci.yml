@@ -16,7 +16,7 @@ push-registry-dev:
   stage: push-registry-dev
   script:
     -  docker login -u "phongthien" -p "phongthien"
-    - docker build --pull --tag "phongthien/quanlynhahang:latest" -f Dockerfile .
+    - docker build tag "phongthien/quanlynhahang:latest" -f Dockerfile .
     - docker push "phongthien/quanlynhahang:latest"
   tags:
     - docker

@@ -13,7 +13,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
-        self.room_group_name = 'chat_%s' % self.room_name
+        self.room_group_name = self.room_name
+        print(self.room_group_name)
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
@@ -61,7 +62,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             else:
                 print(bill_detail_serializer.error_messages)
                 await self.send(text_data=json.dumps(
-                    {"success": True, "type": "confirm", 'message': "cos loi"},
+                    {"success": False, "type": "confirm", 'message': "cos loi"},
                     ensure_ascii=False
 
                 ))
@@ -99,7 +100,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def chat_message(self, event):
         message = event['message']
-        print(message)
+        print("chef")
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
             "type": "chef",
