@@ -20,7 +20,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
         await self.accept()
         if self.room_name == "chef":
-            best_food = await self.conention_query()
+            best_food = self.conention_query()
             print(best_food)
             best_food_serializer = BestFoodSerializer(best_food, many=True)
             await self.channel_layer.group_send(
