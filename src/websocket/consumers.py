@@ -47,7 +47,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         data = text_data_json['data']
         print( self.room_name == "order")
-        print(data[0])
         if self.room_name == "order":
             bill_detail_serializer = BillDetailSerializer(data=data, many=True)
             print("thanh cong")
@@ -109,9 +108,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 
 def chef_cook(data):
-    print(data["food"])
+    print(data)
     amount = data["amount"]
-    queryset = BillDetail.objects.all().filter(food=int(data["food"]))
+    queryset = BillDetail.objects.all().filter(food=data["food"])
     if len(queryset) > 0:
         print(queryset)
         i = 1
@@ -130,6 +129,7 @@ def chef_cook(data):
             print(chef_bill)
             chef_bill.save()
             # queryset[i].save()
+            print(chef_bill)
         print(queryset[0].amount_complete, queryset[0].amount_complete)
 
         # while amount>0:
