@@ -3,3 +3,4 @@ python3 manage.py  makemigrations src  --settings=settings.settings
 python3 manage.py migrate src
 python3 manage.py runserver --settings=settings.local_settings
 python3 manage.py migrate src --settings=settings.local_settings
+docker login -u "phongthien" -p "phongthien";  docker pull phongthien/quanlynhahang:latest ; docker rm $(docker stop quanlynhahang ); docker run --name quanlynhahang  -d -p 8000:8000 phongthien/quanlynhahang:latest; exit

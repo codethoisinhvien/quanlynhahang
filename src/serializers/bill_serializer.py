@@ -22,3 +22,9 @@ class BillDetailMoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bill
         fields = '__all__'
+class BillDetailTableSerializer(serializers.ModelSerializer):
+    table = TableSerializer()
+
+    class Meta:
+        model = Bill
+        fields = '__all__'

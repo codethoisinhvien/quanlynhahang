@@ -60,6 +60,7 @@ class TimeStampMixin(models.Model):
 class Bill(TimeStampMixin):
     table = models.ForeignKey(Table, models.CASCADE)
     customer = models.ForeignKey(Customer, models.CASCADE)
+    total_money = models.IntegerField(default=0)
     status = models.CharField(max_length=2)
 
 
@@ -72,4 +73,5 @@ class BillDetail(TimeStampMixin):
 class ChefBill(TimeStampMixin):
     bill_detail = models.ForeignKey(BillDetail, related_name='bill_chef', on_delete=models.CASCADE)
     amount = models.IntegerField()
+
 

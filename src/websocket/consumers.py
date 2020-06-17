@@ -3,8 +3,9 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.db.models import Sum
 
-from src.models import BillDetail, ChefBill
+from src.models import BillDetail, ChefBill, Bill
 from src.serializers.bill_detail_serializer import BillDetailSerializer
+from src.serializers.bill_serializer import BillDetailMoreSerializer
 from src.serializers.chef_bill_serializer import ChefBillSerializer
 from src.serializers.food_serializer import BestFoodSerializer
 
@@ -32,7 +33,25 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 }
             )
         elif self.room_name == "delivery":
-            pass
+            query = ChefBill.objects.all()
+            chef_bill_serializer = ChefBillSerializer(query, many=True)
+            await self.channel_layer.group_send(
+                "delivery",
+                {
+                    'type': 'chat_message',
+                    'message': chef_bill_serializer.data
+                }
+            )
+        elif self.room_name == "pay":
+            bill = Bill.objects.all()
+            a = BillDetailMoreSerializer(bill, many=True)
+            await self.channel_layer.group_send(
+                "pay",
+                {
+                    'type': 'chat_message',
+                    'message': a.data
+                }
+            )
 
     def conention_query(self):
 
@@ -46,7 +65,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         data = text_data_json['data']
-        print( self.room_name == "order")
+        print(self.room_name == "order")
         if self.room_name == "order":
             bill_detail_serializer = BillDetailSerializer(data=data, many=True)
             print("thanh cong")
