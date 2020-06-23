@@ -73,5 +73,11 @@ class BillDetail(TimeStampMixin):
 class ChefBill(TimeStampMixin):
     bill_detail = models.ForeignKey(BillDetail, related_name='bill_chef', on_delete=models.CASCADE)
     amount = models.IntegerField()
+    status = models.BooleanField(default=True)
+    delivery_by = models.CharField(default="",max_length=50,)
+class DeliveryBill(TimeStampMixin):
+    table = models.ForeignKey(Table, related_name='bill_detail', on_delete=models.CASCADE)
+    create_by = models.CharField(default="",max_length=50,)
+
 
 

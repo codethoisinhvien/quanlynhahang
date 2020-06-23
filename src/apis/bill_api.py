@@ -1,3 +1,4 @@
+from typing import re
 
 from rest_framework.views import APIView, Response
 
@@ -11,7 +12,13 @@ class BillsAPI(APIView):
 
         # data= {'table':table,'custumer':customer,'status':"or"}
         print(request.data)
-        bill_serializer = BillSerializer(data=request.data,many=True)
+        table=Table.objects.get(pk=request.data['table'])
+        if table.status==True:
+            table.status=False
+            table.save()
+        else:
+            return Response({'success': False, 'message': "Bàn đã được đặt"})
+        bill_serializer = BillSerializer(data=request.data)
         if bill_serializer.is_valid():
 
             bill_serializer.save()
@@ -35,11 +42,14 @@ class BillAPI(APIView):
         })
 
     def put(self, request, id=None):
-        bill_detail = Bill.objects.get(pk=id)
-        bill_detail.status = request.data["status"]
+        bill = Bill.objects.get(pk=id)
+        bill.status = request.data["status"]
+        if request.data["status"]=="PA":
+            bill.table.status=True
+            bill.table.save()
         try:
-            bill_detail.save()
-            bill_serializer = BillDetailMoreSerializer(bill_detail)
+            bill.save()
+            bill_serializer = BillDetailMoreSerializer(bill)
             return Response({
                 'success': True,
                 'message': "Thành công",

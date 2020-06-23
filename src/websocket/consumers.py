@@ -38,15 +38,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
             await self.channel_layer.group_send(
                 "delivery",
                 {
-                    'type': 'chat_message',
+                    'type': 'chat_message_delivery',
                     'message': chef_bill_serializer.data
                 }
             )
-        elif self.room_name == "pay":
+        elif self.room_name == "payment":
             bill = Bill.objects.all()
             a = BillDetailMoreSerializer(bill, many=True)
             await self.channel_layer.group_send(
-                "pay",
+                "payment",
                 {
                     'type': 'chat_message',
                     'message': a.data
@@ -68,7 +68,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         print(self.room_name == "order")
         if self.room_name == "order":
             bill_detail_serializer = BillDetailSerializer(data=data, many=True)
-            print("thanh cong")
             if bill_detail_serializer.is_valid():
                 bill_detail_serializer.save()
 
@@ -115,13 +114,41 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 ensure_ascii=False
 
             ))
+        elif self.room_name == "delivery":
+            id = data['id']
+            print(data)
+            query = ChefBill.objects.get(pk=id)
+            if query.status == True:
+                query.status = False
+                query.delivery_by = data['delivery_by']
+                query.save()
+            query2 = ChefBill.objects.all()
+            chef_bill_serializer = ChefBillSerializer(query2, many=True)
+            await self.channel_layer.group_send(
+                "delivery",
+                {
+                    'type': 'chat_message_delivery',
+                    'message': chef_bill_serializer.data
+                }
+            )
 
     async def chat_message(self, event):
+        print(event)
         message = event['message']
         print("chef")
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
             "type": "chef",
+            'message': message
+        }, ensure_ascii=False))
+
+    async def chat_message_delivery(self, event):
+        print(event)
+        message = event['message']
+        print("chef")
+        # Send message to WebSocket
+        await self.send(text_data=json.dumps({
+            "type": "delivery",
             'message': message
         }, ensure_ascii=False))
 
@@ -133,26 +160,24 @@ def chef_cook(data):
     if len(queryset) > 0:
         print(queryset)
         i = 1
+        while amount > 0:
+            if queryset[i].amount > queryset[i].amount_complete:
+                chef_bill = ChefBill()
+                chef_bill.bill_detail = queryset[i]
+                if amount > (queryset[i].amount - queryset[i].amount_complete):
+                    queryset[i].amount_complete = queryset[i].amount
+                    amount = amount - queryset[i].amount
+                    chef_bill.amount = queryset[i].amount
+                else:
+                    queryset[i].amount_complete = queryset[i].amount_complete + amount
+                    chef_bill.amount = amount
+                    amount = 0
+                print(chef_bill)
+                chef_bill.save()
+                # queryset[i].save()
+                print(chef_bill)
+                i = i + 1
+                if i > len(queryset):
+                    break
+        print(queryset[i].amount_complete, queryset[i].amount_complete)
 
-        if queryset[i].amount > queryset[i].amount_complete:
-            chef_bill = ChefBill()
-            chef_bill.bill_detail = queryset[i]
-            if amount > (queryset[i].amount - queryset[i].amount_complete):
-                # queryset[i].amount_complete = queryset[i].amount
-                amount = amount - queryset[i].amount
-                chef_bill.amount = queryset[i].amount
-            else:
-                # queryset[i].amount_complete = queryset[i].amount_complete + amount
-                chef_bill.amount = amount
-                amount = 0
-            print(chef_bill)
-            chef_bill.save()
-            # queryset[i].save()
-            print(chef_bill)
-        print(queryset[0].amount_complete, queryset[0].amount_complete)
-
-        # while amount>0:
-
-
-def connect_query():
-    pass

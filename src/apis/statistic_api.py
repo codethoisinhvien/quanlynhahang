@@ -13,7 +13,6 @@ class StatisticApi(APIView):
             extra({'date': "date(created_at)"}). \
             values('date'). \
             annotate(total=Sum('total_money'))
-        print(money)
         a= BillStatisticSerializer(money,many=True)
         return Response({"success": True,
                          "data":{
