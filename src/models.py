@@ -24,6 +24,7 @@ class Table(models.Model):
     name = models.CharField(max_length=50, unique=True)
     price = models.IntegerField(default=0),
     table_group = models.ForeignKey(TableGroup, models.CASCADE)
+    # slot_amount = models.IntegerField(default=0)
     location = models.CharField(max_length=50)
     status = models.BooleanField(default=True)
 
@@ -69,15 +70,16 @@ class BillDetail(TimeStampMixin):
     food = models.ForeignKey(Food, related_name='food_name', on_delete=models.CASCADE)
     amount = models.IntegerField()
     amount_complete = models.IntegerField(default=0)
-    status=models.BooleanField(default=True)
+    status = models.BooleanField(default=True)
+
+
 class ChefBill(TimeStampMixin):
     bill_detail = models.ForeignKey(BillDetail, related_name='bill_chef', on_delete=models.CASCADE)
     amount = models.IntegerField()
     status = models.BooleanField(default=True)
-    delivery_by = models.CharField(default="",max_length=50,)
+    delivery_by = models.CharField(default="", max_length=50, )
+
+
 class DeliveryBill(TimeStampMixin):
     table = models.ForeignKey(Table, related_name='bill_detail', on_delete=models.CASCADE)
-    create_by = models.CharField(default="",max_length=50,)
-
-
-
+    create_by = models.CharField(default="", max_length=50, )
