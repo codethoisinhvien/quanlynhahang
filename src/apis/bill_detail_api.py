@@ -2,11 +2,14 @@ from rest_framework.views import APIView, Response
 
 from src.models import BillDetail
 from src.serializers.bill_detail_serializer import BillDetailSerializer
-
+# from websocket import create_connection
 
 class BillDetail(APIView):
     def post(self, request):
-        bill_setail_serializer = BillDetailSerializer(data=request.data)
+        bill_setail_serializer = BillDetailSerializer(data=request.data,many=True)
+        # ws = create_connection("ws://localhost:8000/ws/chat/a/")
+        # ws.send("123123")
+        # ws.close()
         if bill_setail_serializer.is_valid():
             bill_setail_serializer.save()
             return Response({"success": True, 'bill_detail': bill_setail_serializer.data})
@@ -22,8 +25,10 @@ class BillDetail(APIView):
             return Response({"success": True, 'bill_detail': bill_setail_serializer.validated_data})
         else:
             return Response({"success": False, 'bill_detail': bill_setail_serializer.error_messages})
-    def delete(self,request,id=None):
+
+    def delete(self, request, id=None):
         object = BillDetail.objects.get(pk=id)
-        object.status=False
+        object.status = False
         object.save()
-        return Response({'success':True,'message':'Xóa thành công'})
+        return Response({'success': True, 'message': 'Xóa thành công'})
+

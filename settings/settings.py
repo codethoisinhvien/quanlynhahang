@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+# -*- coding: utf-8 -*-s
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'drf_yasg',
-    'authentication',
+    'channels',
     'src'
 ]
 # REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'}
@@ -54,7 +53,16 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
-
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [(
+                "45.32.23.158",
+                6379)],
+        },
+    },
+}
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -73,29 +81,54 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
+ASGI_APPLICATION = 'config.routing.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
+#mysql://b6bf90554358da:567e8bb3@eu-cdbr-west-03.cleardb.net/heroku_cdabdc4c39b1f6a?reconnect=true
 DATABASES = {
+
+    #mysql://baa8c17652c072:7a78290d@eu-cdbr-west-03.cleardb.net/heroku_ea7c41c0bb52e0c?reconnect=true
+# b389c51cbab589:1e546445@eu-cdbr-west-03.cleardb.net/heroku_f69c089a84a2606?reconnect=true
+
     'default': {
 
         'ENGINE': 'django.db.backends.mysql',
         # MySQL database host ip.
         # MySQL database host ip.
-        'HOST': 'eu-cdbr-west-02.cleardb.net',
+        'HOST': 'eu-cdbr-west-03.cleardb.net',
         # port number.
         'PORT': '3306',
         # database name.
-        'NAME': 'heroku_054d3526d2b6b7b',
+        'NAME': 'heroku_ea7c41c0bb52e0c',
         # user name.
-        'USER': 'bc981f7580442e',
+        'USER': 'baa8c17652c072',
         # password
-        'PASSWORD': 'dc386137',
+        'PASSWORD': '7a78290d',
         # connect options
-        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", 'charset': 'utf8mb4'},
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8',
+            'use_unicode': True},
 
-    }
+    },
+# 'default': {
+#
+#         'ENGINE': 'django.db.backends.mysql',
+#         # MySQL database host ip.
+#         # MySQL database host ip.
+#         'HOST': '127.0.0.1',
+#         # port number.
+#         'PORT': '3306',
+#         # database name.
+#         'NAME': 'quanlynhahang',
+#         # user name.
+#         'USER': 'root',
+#         # password
+#         'PASSWORD': '',
+#         # connect options
+#         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", 'charset': 'utf8mb4'},
+#
+#     }
 
 }
 

@@ -1,9 +1,10 @@
-Django
+Django==2.2.11
 djangorestframework
 django-cors-headers
 mysqlclient
 gunicorn
 httplib2
 daphne
-drf-yasg
-
+channels
+channels_redis
+websocket
