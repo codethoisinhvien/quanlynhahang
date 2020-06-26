@@ -5,7 +5,7 @@ from django.db.models import Sum
 
 from src.models import BillDetail, ChefBill, Bill
 from src.serializers.bill_detail_serializer import BillDetailSerializer
-from src.serializers.bill_serializer import BillDetailMoreSerializer
+from src.serializers.bill_serializer import BillDetailMoreSerializer, BillDetailTableSerializer
 from src.serializers.chef_bill_serializer import ChefBillSerializer
 from src.serializers.food_serializer import BestFoodSerializer
 
@@ -23,7 +23,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
         if self.room_name == "chef":
             best_food = self.conention_query()
-            print(best_food)
             best_food_serializer = BestFoodSerializer(best_food, many=True)
             await self.channel_layer.group_send(
                 self.room_group_name,
@@ -44,11 +43,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
         elif self.room_name == "payment":
             bill = Bill.objects.all()
-            a = BillDetailMoreSerializer(bill, many=True)
+            a = BillDetailTableSerializer(bill, many=True)
             await self.channel_layer.group_send(
                 "payment",
                 {
-                    'type': 'chat_message',
+                    'type': 'chat_message_payment',
                     'message': a.data
                 }
             )
@@ -65,7 +64,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         data = text_data_json['data']
-        print(self.room_name == "order")
         if self.room_name == "order":
             bill_detail_serializer = BillDetailSerializer(data=data, many=True)
             if bill_detail_serializer.is_valid():
@@ -109,16 +107,28 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     'message': chef_bill_serializer.data
                 }
             )
+            best_food = BillDetail.objects.values('food__name', 'food') \
+                .order_by('food').annotate(count=Sum('amount'),
+                                           count_complete=Sum(
+                                               'amount_complete')).filter()
+            best_food_serializer = BestFoodSerializer(best_food, many=True)
+            await self.channel_layer.group_send(
+                "chef",
+                {
+                    'type': 'chat_message',
+                    'message': best_food_serializer.data
+                }
+            )
             await self.send(text_data=json.dumps(
                 {"success": True, "type": "confirm", 'bill_detail': "món ăn"},
                 ensure_ascii=False
 
             ))
         elif self.room_name == "delivery":
-            id = data['id']
-            print(data)
-            query = ChefBill.objects.get(pk=id)
-            if query.status == True:
+            chef_bill_id = data['id']
+
+            query = ChefBill.objects.get(pk=chef_bill_id)
+            if query.status:
                 query.status = False
                 query.delivery_by = data['delivery_by']
                 query.save()
@@ -129,6 +139,39 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 {
                     'type': 'chat_message_delivery',
                     'message': chef_bill_serializer.data
+                }
+            )
+        elif self.room_name == "payment":
+            # get bill
+            print(data["status"] == 'PR')
+            one_bill = Bill.objects.get(pk=data["id"])
+            if one_bill.status == 'OR' and data["status"] == 'PR':
+                one_bill.status = data["status"]
+                # chuyen trang thai ban
+                one_bill.save()
+
+                await self.send(text_data=json.dumps(
+                    {"success": True, "type": "confirm"},
+                    ensure_ascii=False
+
+                ))
+            elif one_bill.status == "PR" and data["status"] == "PA":
+                one_bill.status = data["status"]
+                one_bill.save()
+                one_bill.table.status = True
+                one_bill.table.save()
+                await self.send(text_data=json.dumps(
+                    {"success": True, "type": "confirm"},
+                    ensure_ascii=False
+
+                ))
+            bill = Bill.objects.all()
+            a = BillDetailMoreSerializer(bill, many=True)
+            await self.channel_layer.group_send(
+                "payment",
+                {
+                    'type': 'chat_message_payment',
+                    'message': a.data
                 }
             )
 
@@ -152,15 +195,25 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'message': message
         }, ensure_ascii=False))
 
+    async def chat_message_payment(self, event):
+        print(event)
+        message = event['message']
+        print("payment")
+        # Send message to WebSocket
+        await self.send(text_data=json.dumps({
+            "type": "payment",
+            'message': message
+        }, ensure_ascii=False))
+
 
 def chef_cook(data):
-    print(data)
     amount = data["amount"]
-    queryset = BillDetail.objects.all().filter(food=data["food"])
+    queryset = BillDetail.objects.filter(food=data["food"])
     if len(queryset) > 0:
         print(queryset)
-        i = 1
+        i = 0
         while amount > 0:
+            print(i)
             if queryset[i].amount > queryset[i].amount_complete:
                 chef_bill = ChefBill()
                 chef_bill.bill_detail = queryset[i]
@@ -174,10 +227,8 @@ def chef_cook(data):
                     amount = 0
                 print(chef_bill)
                 chef_bill.save()
-                # queryset[i].save()
-                print(chef_bill)
-                i = i + 1
-                if i > len(queryset):
-                    break
-        print(queryset[i].amount_complete, queryset[i].amount_complete)
+                queryset[i].save()
 
+            i = i + 1
+            if i > len(queryset):
+                break

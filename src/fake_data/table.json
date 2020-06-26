@@ -11,21 +11,21 @@
     "price": 2,
     "table_group": "Tầng 1",
     "location": "99713 Maywood Place",
-    "status": false
+    "status": true
   },
   {
     "name": "Bàn T3",
     "price": 3,
     "table_group": "Tầng 1",
     "location": "1 Corben Pass",
-    "status": false
+    "status": true
   },
   {
     "name": "Bàn T4",
     "price": 4,
     "table_group": "Tầng 1",
     "location": "5 Scoville Circle",
-    "status": false
+    "status": true
   },
   {
     "name": "Bàn T5",
@@ -53,7 +53,7 @@
     "price": 8,
     "table_group": "Tầng 2",
     "location": "51382 Ohio Alley",
-    "status": false
+    "status": true
   },
   {
     "name": "Bàn T9",
@@ -81,6 +81,6 @@
     "price": 11,
     "table_group": "Tầng 3",
     "location": "4 Glacier Hill Junction",
-    "status": false
+    "status": true
   }
 ]

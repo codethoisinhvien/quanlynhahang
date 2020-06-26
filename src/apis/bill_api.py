@@ -9,8 +9,6 @@ from src.serializers.bill_serializer import BillSerializer, BillDetailMoreSerial
 class BillsAPI(APIView):
 
     def post(self, request):
-
-        # data= {'table':table,'custumer':customer,'status':"or"}
         print(request.data)
         table=Table.objects.get(pk=request.data['table'])
         if table.status==True:

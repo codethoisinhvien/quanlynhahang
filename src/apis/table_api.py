@@ -5,17 +5,17 @@ from src.serializers.table_serializer import TableSerializer, TableUpdateSeriali
 
 
 class TableApi(APIView):
-    def post(self, resquest):
-        table_serializer = TableSerializer(data=resquest.data)
+    def post(self, request):
+        table_serializer = TableSerializer(data=request.data)
         if table_serializer.is_valid():
             table_serializer.save()
             return Response({"success": True, "table": table_serializer.data})
         else:
             return Response({"success": False, "message": table_serializer.error_messages})
 
-    def get(self, resquest):
-        status=resquest.GET.get('status', None)
-        if status==None:
+    def get(self, request):
+        status=request.GET.get('status', None)
+        if status is None:
             status= True
         tables = Table.objects.filter(status=status)
         tables_serializer = TableSerializer(tables, many=True)
@@ -24,10 +24,12 @@ class TableApi(APIView):
     def put(self, resquest, id=None):
         table_serializer = TableUpdateSerializer(data=resquest.data)
         if table_serializer.is_valid():
-            object = Table.objects.get(id)
-            table_serializer.update(object, table_serializer.validated_data)
+            obj = Table.objects.get(pk=id)
+            table_serializer.update(obj, table_serializer.validated_data)
+            return Response({"success": True, "message": "ok"})
+
         else:
-            return Response({"success": False, "message": table_serializer.error_messages})
+            return Response({"success": False, "message": table_serializer.errors})
 
     def delete(self, request):
 

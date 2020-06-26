@@ -36,4 +36,3 @@ deploy-dev:
     - eval "$(ssh-agent -s)"
   script:
     - sshpass -p "y2D%5]y4Z!Rmc3#Q" ssh -t -oStrictHostKeyChecking=no root@45.32.23.158 'docker login -u "phongthien" -p "phongthien";  docker pull phongthien/quanlynhahang:latest ; docker rm $(docker stop quanlynhahang ); docker run --name quanlynhahang  -d -p 8000:8000 phongthien/quanlynhahang:latest; exit ;'
-
