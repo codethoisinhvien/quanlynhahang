@@ -11,7 +11,7 @@ class BillsAPI(APIView):
     def post(self, request):
         print(request.data)
         table=Table.objects.get(pk=request.data['table'])
-        if table.status==True:
+        if table.status:
             table.status=False
             table.save()
         else:

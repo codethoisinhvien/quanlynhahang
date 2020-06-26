@@ -44,7 +44,6 @@ class BestFood(APIView):
     def get(self, request):
         best_food = BillDetail.objects.values('food__name','food') \
             .order_by('food').annotate(count=Sum('amount'),count_complete=Sum('amount_complete')).filter()
-        print(best_food)
         best_food_serializer = BestFoodSerializer(best_food, many=True)
         return Response({'success': True,
                          'best_food': best_food_serializer.data
