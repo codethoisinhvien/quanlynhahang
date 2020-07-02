@@ -25,7 +25,7 @@ from src.apis.customer_api import CustomersAPI
 from src.apis.food_api import BestFood
 from src.apis.office_api import OfficeApi
 from src.apis.statistic_api import StatisticApi
-from src.apis.table_api import TableApi
+from src.apis.table_api import TablesApi,TableApi
 from src.apis.table_group_api import TableGroupApi
 from src.apis.user_api import UsersApi, UserApi
 
@@ -39,10 +39,11 @@ urlpatterns = [
     path(r'foods/<int:id>', FoodApi.as_view(), name='foods'),
     path(r'table-groups', TableGroupApi.as_view(), name='tabele-groups'),
     path(r'table-groups/<int:id>', TableGroupApi.as_view(), name='table-group'),
-    path(r'tables', TableApi.as_view(), name='table-group'),
-    path(r'tables/<int:id>', TableApi.as_view(), name='table-group'),
+    path(r'tables', TablesApi.as_view(), name='table-group'),
+    path(r'tables/<int:id>', TablesApi.as_view(), name='table-group'),
+    path(r'tables/<int:table_id>/bills', TableApi.as_view(), name='table-group'),
     path(r'customers', CustomersAPI.as_view(), name='customers'),
-    path(r'customer/<int:id>', TableApi.as_view(), name='customer'),
+    path(r'customer/<int:id>', TablesApi.as_view(), name='customer'),
     path(r'bills', BillsAPI.as_view(), name='bills'),
     path(r'bills/<int:id>', BillAPI.as_view(), name='bill'),
     path(r'bill-detail', BillDetail.as_view(), name='bill'),

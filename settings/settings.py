@@ -27,7 +27,32 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Application definition
+LOGGING = {
+    'disable_existing_loggers': False,
+    'version': 1,
+    'handlers': {
+        'console': {
+            # logging handler that outputs log messages to terminal
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG',  # message level to be written to console
+        },
+    },
+    'loggers': {
+        '': {
+            # this sets root level logger to log debug and higher level
+            # logs to console. All other loggers inherit settings from
+            # root level logger.
 
+            'level': 'DEBUG',
+            'propagate': False,  # this tells logger to send logging message
+            # to its parent (will send if set to True)
+        },
+        'django.db': {
+            'level': 'DEBUG',
+            'handlers': ['console', ],
+        },
+    },
+}
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -105,6 +130,7 @@ DATABASES = {
         # password
         'PASSWORD': 'password',
         # connect options
+        'CONN_MAX_AGE': 290,
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
             'charset': 'utf8',

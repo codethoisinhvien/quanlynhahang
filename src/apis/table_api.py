@@ -1,10 +1,12 @@
+from django.db.models import Q
 from rest_framework.views import APIView, Response
 
-from src.models import Table
-from src.serializers.table_serializer import TableSerializer, TableUpdateSerializer
+from src.models import Table, Bill
+from src.serializers.bill_serializer import TableSerializer, BillDetailMoreSerializer
+from src.serializers.table_serializer import TableUpdateSerializer
 
 
-class TableApi(APIView):
+class TablesApi(APIView):
     def post(self, request):
         table_serializer = TableSerializer(data=request.data)
         if table_serializer.is_valid():
@@ -14,10 +16,13 @@ class TableApi(APIView):
             return Response({"success": False, "message": table_serializer.error_messages})
 
     def get(self, request):
-        status=request.GET.get('status', None)
+        status = request.GET.get('status', None)
         if status is None:
-            status= True
-        tables = Table.objects.filter(status=status)
+            status_filter = Q()
+        else:
+            status_filter = Q(status=status)
+
+        tables = Table.objects.filter(status_filter)
         tables_serializer = TableSerializer(tables, many=True)
         return Response({'success': True, 'data': tables_serializer.data})
 
@@ -35,3 +40,10 @@ class TableApi(APIView):
 
         table = Table.objects.get(pk=id).delete()
         return Response({'success': True, 'message': "Xóa thành công"})
+
+
+class TableApi(APIView):
+    def get(self, request, table_id=None):
+        bills = Bill.objects.filter(table=table_id,status="OR").first()
+        bill_serializer = BillDetailMoreSerializer(bills)
+        return Response({'success': True, 'data': bill_serializer.data})

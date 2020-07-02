@@ -9,7 +9,7 @@ class BillDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BillDetail
-        fields = ("food_name","amount_complete","price")
+        fields = "__all__"
 
     def get_food_name(self, obj):
         return obj.food.name

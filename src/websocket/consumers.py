@@ -1,11 +1,11 @@
 import json
 
 from channels.generic.websocket import AsyncWebsocketConsumer
-from django.db.models import Sum
+from django.db.models import Sum, Q, F
 
 from src.models import BillDetail, ChefBill, Bill
 from src.serializers.bill_detail_serializer import BillDetailSerializer
-from src.serializers.bill_serializer import BillDetailMoreSerializer, BillDetailTableSerializer
+from src.serializers.bill_serializer import BillDetailMoreSerializer
 from src.serializers.chef_bill_serializer import ChefBillSerializer
 from src.serializers.food_serializer import BestFoodSerializer
 
@@ -43,7 +43,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
         elif self.room_name == "payment":
             bill = Bill.objects.all()
-            a = BillDetailTableSerializer(bill, many=True)
+            a = BillDetailMoreSerializer(bill, many=True)
             await self.channel_layer.group_send(
                 "payment",
                 {
@@ -56,7 +56,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         return BillDetail.objects.values('food__name', 'food') \
             .order_by('food').annotate(count=Sum('amount'), count_complete=Sum(
-            'amount_complete')).filter()
+            'amount_complete')).filter(Q(amount__gt=F('amount_complete')))
 
     async def disconnect(self, close_code):
         pass
@@ -132,6 +132,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 query.status = False
                 query.delivery_by = data['delivery_by']
                 query.save()
+            else:
+                query.delete()
             query2 = ChefBill.objects.all()
             chef_bill_serializer = ChefBillSerializer(query2, many=True)
             await self.channel_layer.group_send(
@@ -208,7 +210,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 def chef_cook(data):
     amount = data["amount"]
-    queryset = BillDetail.objects.filter(food=data["food"])
+    queryset = BillDetail.objects.filter(Q(food=data["food"]), Q(amount__gt=F('amount_complete')))
+    print(queryset)
     if len(queryset) > 0:
         print(queryset)
         i = 0

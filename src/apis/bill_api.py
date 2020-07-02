@@ -30,6 +30,8 @@ class BillsAPI(APIView):
         return Response({'success': True, 'bills': bill_serializer.data})
 
 
+
+
 class BillAPI(APIView):
     def get(self, request, id=None):
         bill_detail = Bill.objects.get(pk=id)

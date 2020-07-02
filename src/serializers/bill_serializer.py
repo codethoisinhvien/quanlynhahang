@@ -14,25 +14,31 @@ class BillSerializer(serializers.ModelSerializer):
 
 
 class BillDetailMoreSerializer(serializers.ModelSerializer):
-    bill_detail = serializers.SerializerMethodField('get_bill_detail', read_only=True)
     table = TableSerializer()
     customer = CustomerSerializer()
+    bill_detail = serializers.SerializerMethodField('get_bill_detail', read_only=True)
     total = serializers.SerializerMethodField('get_total', read_only=True)
+
     class Meta:
         model = Bill
         fields = '__all__'
 
     def get_bill_detail(self, obj):
         queryset = BillDetail.objects.values('food', 'food__name', 'food__price') \
-            .order_by('food').annotate(amount=Sum('amount_complete')).filter()
+            .order_by('food').annotate(amount=Sum('amount_complete')).filter(bill=obj.id)
         print(queryset)
         bill_detail = BillTotalSerializer(queryset, many=True)
         return bill_detail.data
-    def get_total(self,obj):
-        queryset = BillDetail.objects.filter(bill=obj.id).values('bill') \
-            .annotate(amount=Sum('amount_complete'),total=Sum('bill', field="amount * food__price"))
-        print(queryset[0]['total'])
-        return queryset[0]['total']
+
+    def get_total(self, obj):
+        queryset = BillDetail.objects.filter(bill=obj.id).values('food', 'food__name', 'food__price') \
+            .order_by('food').annotate(amount=Sum('amount_complete'))
+        total = 0
+        for i in queryset:
+            total = total + i['food__price'] * i['amount']
+        obj.total_money = total
+        obj.save()
+        return total
 
 
 class BillTotalSerializer(serializers.ModelSerializer):
